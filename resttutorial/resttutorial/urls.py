@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 # r代表著prefix會忽略轉義詞，如:/n...等
 router.register(r"users",views.UserViewSet)
 router.register(r"groups",views.GroupViewSet)
+router.register(r"cards",views.CardViewSet)
 
 urlpatterns = [
     path("",include(router.urls)),
