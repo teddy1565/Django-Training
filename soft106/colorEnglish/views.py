@@ -3,8 +3,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
-from .models import GameModel
-from .serializers import GameSerializer
+from .models import GameModel,GameContentModel
+from .serializers import GameSerializer,GameContentSerializer
 from django.shortcuts import render
 
 class GameHomePage(viewsets.ModelViewSet):
@@ -17,8 +17,8 @@ class GameHomePage(viewsets.ModelViewSet):
 
 class GameContext(viewsets.ModelViewSet):
     renderer_classes = [TemplateHTMLRenderer]
-    serializer_class = GameSerializer
+    serializer_class = GameContentSerializer
     template_name = "gameContentPage.html"
-    queryset = GameModel.objects.all()
+    queryset = GameContentModel.objects.all()
     def get(self,request):
         return render(request,"./gameContentPage.html")

@@ -6,3 +6,8 @@ class GameModel(models.Model):
     uid = models.CharField(max_length=100)
     def __str__(self):
         return self.uid
+
+class GameContentModel(models.Model):
+    pass
+    def __set__(self):
+        return 0
