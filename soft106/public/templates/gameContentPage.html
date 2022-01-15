@@ -8,5 +8,51 @@
     </head>
     <body style="background-color: pink;text-align: center;">
         <h1>GAME</h1>
+            <div style="height: 200px;width: 200px;margin: auto;" id="content_block"> 
+            </div>
+        <br>
+        <div id="btns">
+            <button onclick="chose('red')">Red</button>
+            <button onclick="chose('orange')">Orange</button>
+            <button onclick="chose('yellow')">Yellow</button>
+            <button onclick="chose('green')">Green</button>
+            <button onclick="chose('blue')">Blue</button>
+        </div>
+        <div id="reset">
+            <button onclick="window.location.reload()">重玩一次</button>
+        </div>
     </body>
 </html>
+<script>
+    let counter = 0;
+    let score = 0;
+    let color = ["red","orange","yellow","green","blue"];
+    window.onload = () => {
+        document.getElementById("reset").style.display = "none";
+        document.getElementById("content_block").style.backgroundColor = `${color[(parseInt(Math.random()*10)%5)]}`;
+    }
+    function chose(value) {
+        let dp = document.getElementById("content_block").style.backgroundColor;
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                counter++;
+                document.getElementById("content_block").style.backgroundColor = `${color[(parseInt(Math.random()*10)%5)]}`;
+                if (xhr.responseText == "true") {
+                    score++;
+                }
+                if (counter == 5) {
+                    document.getElementById("content_block").innerHTML=`<h1>一共得到${score}分</h1>`;
+                    document.getElementById("content_block").style.backgroundColor="pink";
+                    document.getElementById("btns").style.display = "none";
+                    document.getElementById("reset").style.display = "block";
+                }
+            } else if (xhr.readyState === 4 && xhr.status === 404) {
+                console.log(1);
+            }
+        }
+        xhr.open("get",`/color/control/?dp=${dp}&chose=${value}`);
+        xhr.send();
+    }
+</script>

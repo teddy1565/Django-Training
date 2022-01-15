@@ -9,5 +9,5 @@ class GameModel(models.Model):
 
 class GameContentModel(models.Model):
     pass
-    def __set__(self):
+    def __str__(self):
         return 0
