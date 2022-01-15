@@ -1,8 +1,8 @@
-from django.urls import path, include
+from .views import GameHomePage,GameContent
+from rest_framework import routers
 
-from . import views
+router = routers.DefaultRouter()
+router.register(r"",GameHomePage,basename="index")
+router.register(r"game",GameContent,basename="game")
 
-urlpatterns = [
-   path("",views.GameHomePage),
-   path("game",views.GameContext)
-]
+urlpatterns = router.urls
