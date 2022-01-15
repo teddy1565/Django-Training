@@ -20,6 +20,7 @@ from colorEnglish import views
 
 router = routers.DefaultRouter()
 router.register(r"color",views.GameHomePage)
+router.register(r"color/game",views.GameContext)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

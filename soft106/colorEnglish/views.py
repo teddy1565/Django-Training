@@ -14,3 +14,11 @@ class GameHomePage(viewsets.ModelViewSet):
     queryset = GameModel.objects.all()
     def get(self,request):
         return render(request,"./gameHomePage.html")
+
+class GameContext(viewsets.ModelViewSet):
+    renderer_classes = [TemplateHTMLRenderer]
+    serializer_class = GameSerializer
+    template_name = "gameContentPage.html"
+    queryset = GameModel.objects.all()
+    def get(self,request):
+        return render(request,"./gameContentPage.html")

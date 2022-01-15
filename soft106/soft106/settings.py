@@ -67,7 +67,7 @@ ROOT_URLCONF = 'soft106.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join("./", 'templates')],
+        'DIRS': ["public/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +79,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'soft106.wsgi.application'
 
 
