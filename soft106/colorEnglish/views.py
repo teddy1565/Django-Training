@@ -13,7 +13,7 @@ class GameHomePage(viewsets.ModelViewSet):
     serializer_class = GameSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     template_name = "gameHomePage.html"
-    queryset = GameModel.objects.all()
+    queryset = GameModel.objects.all().order_by("uid")
     def get(self,request):
         return render(request,"./gameHomePage.html")
 
