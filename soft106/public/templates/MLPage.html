@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>深度學習-運算感知機模型</title>
+    </head>
+    <body style="text-align: center;">
+        <h1>深度學習-運算感知機模型</h1>
+        <div id = "start" style="margin: auto;">
+            <span>輸入資料X1~Xn: </span>
+            <input type="text" placeholder="n" id = "Xn">
+            <button type="button" onclick = "processColumn()">產生特徵值輸入</button>
+        </div>
+        <div id = "feature" style="margin: auto;display: none;">
+            
+        </div>
+        <div id = "weights" style="margin: auto;display: none;">
+        </div>
+        <div id = "result" style="margin: auto;display: none;">
+        </div>
+    </body>
+</html>
+<script>
+    function processColumn() {
+        let n = parseInt(document.getElementById("Xn").value);
+        let next = document.getElementById("feature");
+        next.style.display = "block";
+        document.getElementById("start").style.display = "none";
+        for (let i=0;i<n;i++) {
+            let node = document.createElement("input");
+            node.id = `X${i+1}`;
+            node.type = "number";
+            node.placeholder = `特徵值X${i+1}`;
+            next.appendChild(node);
+        }
+        let btn = document.createElement("button");
+        btn.addEventListener("click",()=>{
+            let data = [];
+            for (let i = 0;i < n ;i++) {
+                data.push(document.getElementById(`X${i+1}`).value);
+            }
+            processWeights(n,data)
+        });
+        btn.innerText = "輸入權重值";
+        btn.type = "button";
+        let ln = document.createElement("br");
+        next.appendChild(ln);
+        next.appendChild(btn);
+    }
+
+    function processWeights(n, data) {
+        document.getElementById("feature").style.display = "none";
+        let next = document.getElementById("weights");
+        next.style.display = "block";
+        for (let i=0;i<n;i++) {
+            let node = document.createElement("input");
+            node.id = `W${i+1}`;
+            node.type = "number";
+            node.placeholder = `權重值W${i+1}`;
+            next.appendChild(node);
+        }
+        let btn = document.createElement("button");
+        btn.addEventListener("click",()=>{
+            
+            let d = [];
+            for (let i=0;i<n;i++) {
+                d.push(document.getElementById(`W${i+1}`).value);
+            }
+            let dataset = {
+                "feature":data,
+                "weight":d
+            }
+            processResult(n,dataset);
+        });
+        btn.innerText = "輸入權重值";
+        btn.type = "button";
+        let ln = document.createElement("br");
+        next.appendChild(ln);
+        next.appendChild(btn);
+    }
+    
+    function processResult(n,dataset) {
+        console.log(dataset);
+        let F = 0;
+        for (let i=0;i<n;i++) {
+            let x = parseInt(dataset["feature"][i]);
+            let w = parseFloat(dataset["weight"][i]);
+            F = F+(x*w);
+        }
+        if (F>=0) {
+            console.log(1);
+        } else {
+            console.log(0);
+        }
+    }
+</script>
