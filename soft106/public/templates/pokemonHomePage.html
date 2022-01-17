@@ -42,7 +42,10 @@
             </form>
         </div>
         <div id="listForm" style="margin:auto;display:none;background-color: darkorchid;">
-            <h1>清單</h1>
+            <form method="post" action="/Pokemon/control/list">
+                {% csrf_token %}
+                <button type="submit">清單寶可夢資料</button>
+            </form>
         </div>
     </body>
 </html>

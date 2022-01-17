@@ -11,4 +11,5 @@ class Pokemon(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.name
+        result = f"<pre>{self.uid}\t{self.name}\t{self.position}\t{self.pokemonType}\t{self.serial}\t{self.date}</pre>"
+        return result

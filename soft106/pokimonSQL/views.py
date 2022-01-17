@@ -27,33 +27,41 @@ def addPokemon(request):
     
     try:
         queryset.get(serial=request.POST["serial"])
-        return HttpResponse("False")
+        return HttpResponse("新增失敗")
     except:
         queryset = Pokemon(name=request.POST["name"],serial=request.POST["serial"],position=request.POST["position"],pokemonType=request.POST["pokemonType"])
         queryset.save()
-        return HttpResponse("True")
+        return HttpResponse("新增成功")
 
 def delPokemon(request):
     permission_classes = [permissions.AllowAny]
     try:
         queryset = Pokemon.objects.get(serial=request.POST["serial"])
         queryset.delete()
-        return HttpResponse("True")
+        return HttpResponse("刪除成功")
     except:
-        return HttpResponse("False")
+        return HttpResponse("刪除失敗")
 
 def queryPokemon(request):
     if request.POST["position"] != "" and request.POST["pokemonType"] != "":
         queryset = Pokemon.objects.get(position=request.POST["position"],pokemonType=request.POST["pokemonType"])
         print(queryset)
-        return HttpResponse("True")
+        return HttpResponse(queryset)
     elif request.POST["position"] != "" and request.POST["pokemonType"] =="":
         queryset = Pokemon.objects.get(position=request.POST["position"])
         print(queryset)
-        return HttpResponse("True")
+        return HttpResponse(queryset)
     elif request.POST["position"] == "" and request.POST["pokemonType"] !="":
         queryset = Pokemon.objects.get(pokemonType=request.POST["pokemonType"])
         print(queryset)
-        return HttpResponse("True")
+        return HttpResponse(queryset)
     else:
-        return HttpResponse("False")
+        return HttpResponse("沒有符合條件的資料")
+
+def list(request):
+    permission_classes = [permissions.AllowAny]
+    queryset = Pokemon.objects.all().order_by("date")
+    data = f"<pre>uid\t中文名稱\t出沒地點\t屬性\t圖鑑編號\t建立日期</pre><br>"
+    for i in queryset:
+        data = data + f"{i}<br>"
+    return HttpResponse(data)
