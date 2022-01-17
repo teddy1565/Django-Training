@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from .models import PWD
 from .serializers import PasswordSerializer
 from django.template.context_processors import csrf
+from django.http import HttpResponse
 # Create your views here.
 
 class MainPage(viewsets.ModelViewSet):
@@ -15,3 +16,7 @@ class MainPage(viewsets.ModelViewSet):
         csrf_variable = {}
         csrf_variable.update(csrf(request))
         return render(request,"password.html")
+    
+def regis(request):
+    print(request)
+    return HttpResponse("HI",200)
