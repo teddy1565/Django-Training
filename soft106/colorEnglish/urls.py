@@ -8,5 +8,5 @@ router.register(r"game",GameContent,basename="game")
 
 urlpatterns = [
     path("",include(router.urls)),
-    path("control/",GameControl)
+    path("control/add",GameControl)
 ]

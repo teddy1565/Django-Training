@@ -4,9 +4,75 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>寶可夢資料庫系統</title>
     </head>
-    <body>
-        
+    <body style="text-align: center;">
+        <h1>寶可夢資料庫系統</h1>
+        <div id="operatorBlock" style="margin: auto;">
+            <button onclick="add()" id="addBtn">新增</button>
+            <button onclick="del()" id="delBtn">刪除</button>
+            <button onclick="ser()" id="queryBtn">查詢</button>
+            <button onclick="lst()" id="listBtn">清單</button>
+        </div>
+        <div id="addForm" style="margin:auto;display:none;background-color: pink;">
+            <form method="post" action="/Pokemon/control/add">
+                {% csrf_token %}
+                <input type="text" placeholder="圖鑑編號" name="serial">
+                <input type="text" placeholder="中文名稱" name="name">
+                <br>
+                <input type="text" placeholder="出沒地點" name="position">
+                <input type="text" placeholder="屬性" name="pokemonType">
+                <br>
+                <button type="submit">新增寶可夢資料</button>
+            </form>
+        </div>
+        <div id="delForm" style="margin:auto;display:none;background-color: greenyellow;">
+            <h1>刪除</h1>
+        </div>
+        <div id="queryForm" style="margin:auto;display:none;background-color: aquamarine;">
+            <h1>查詢</h1>
+        </div>
+        <div id="listForm" style="margin:auto;display:none;background-color: darkorchid;">
+            <h1>清單</h1>
+        </div>
     </body>
 </html>
+<script>
+    const blocks = ["addForm","delForm","queryForm","listForm"];
+    function add() {
+        for(const i of blocks) {
+            if (i == "addForm") {
+                document.getElementById(i).style.display = "block";
+            } else {
+                document.getElementById(i).style.display = "none";
+            }
+        }
+    }
+    function del() {
+        for(const i of blocks) {
+            if (i == "delForm") {
+                document.getElementById(i).style.display = "block";
+            } else {
+                document.getElementById(i).style.display = "none";
+            }
+        }
+    }
+    function ser() {
+        for(const i of blocks) {
+            if (i == "queryForm") {
+                document.getElementById(i).style.display = "block";
+            } else {
+                document.getElementById(i).style.display = "none";
+            }
+        }
+    }
+    function lst() {
+        for(const i of blocks) {
+            if (i == "listForm") {
+                document.getElementById(i).style.display = "block";
+            } else {
+                document.getElementById(i).style.display = "none";
+            }
+        }
+    }
+</script>

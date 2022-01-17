@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path,include
-from .views import pokemonHomePage
+from .views import pokemonHomePage,addPokemon
 
 from rest_framework import routers
 
@@ -10,5 +10,5 @@ router.register(r"homePage",pokemonHomePage,basename="hpp")
 
 urlpatterns = [
     path("",include(router.urls)),
-    #path("homePage/",pokemonHomePage),
+    path("control/add",addPokemon),
 ]
