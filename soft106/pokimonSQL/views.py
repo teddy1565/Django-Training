@@ -1,3 +1,4 @@
+from turtle import position
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -39,4 +40,20 @@ def delPokemon(request):
         queryset.delete()
         return HttpResponse("True")
     except:
+        return HttpResponse("False")
+
+def queryPokemon(request):
+    if request.POST["position"] != "" and request.POST["pokemonType"] != "":
+        queryset = Pokemon.objects.get(position=request.POST["position"],pokemonType=request.POST["pokemonType"])
+        print(queryset)
+        return HttpResponse("True")
+    elif request.POST["position"] != "" and request.POST["pokemonType"] =="":
+        queryset = Pokemon.objects.get(position=request.POST["position"])
+        print(queryset)
+        return HttpResponse("True")
+    elif request.POST["position"] == "" and request.POST["pokemonType"] !="":
+        queryset = Pokemon.objects.get(pokemonType=request.POST["pokemonType"])
+        print(queryset)
+        return HttpResponse("True")
+    else:
         return HttpResponse("False")

@@ -34,7 +34,12 @@
             </form>
         </div>
         <div id="queryForm" style="margin:auto;display:none;background-color: aquamarine;">
-            <h1>查詢</h1>
+            <form method="post" action="/Pokemon/control/query">
+                {% csrf_token %}
+                <input type="text" placeholder="出沒地點" name="position">
+                <input type="text" placeholder="屬性" name="pokemonType">
+                <button type="submit">查詢寶可夢資料</button>
+            </form>
         </div>
         <div id="listForm" style="margin:auto;display:none;background-color: darkorchid;">
             <h1>清單</h1>
