@@ -31,8 +31,12 @@ def addPokemon(request):
         queryset = Pokemon(name=request.POST["name"],serial=request.POST["serial"],position=request.POST["position"],pokemonType=request.POST["pokemonType"])
         queryset.save()
         return HttpResponse("True")
-        
-    # print(request.POST["name"])
-    # print(request.POST["serial"])
-    # print(request.POST["position"])
-    # print(request.POST["pokemonType"])
+
+def delPokemon(request):
+    permission_classes = [permissions.AllowAny]
+    try:
+        queryset = Pokemon.objects.get(serial=request.POST["serial"])
+        queryset.delete()
+        return HttpResponse("True")
+    except:
+        return HttpResponse("False")
