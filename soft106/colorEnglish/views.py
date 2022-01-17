@@ -13,17 +13,13 @@ class GameHomePage(viewsets.ModelViewSet):
     serializer_class = GameSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     template_name = "gameHomePage.html"
-    queryset = GameModel.objects.all().order_by("uid")
-    def get(self,request):
-        return render(request,"./gameHomePage.html")
+    queryset = GameModel.objects.none()
 
 class GameContent(viewsets.ModelViewSet):
     renderer_classes = [TemplateHTMLRenderer]
     serializer_class = GameContentSerializer
     template_name = "gameContentPage.html"
     queryset = GameContentModel.objects.all().order_by("id")
-    def get(self,request):
-        return render(request,"./gameContentPage.html")
 
 def GameControl(request):
     if (request.GET["dp"] == request.GET["chose"]):
