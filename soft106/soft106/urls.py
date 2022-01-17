@@ -28,4 +28,5 @@ urlpatterns = [
     path("api-auth/",include('rest_framework.urls')),
     path("ML/",include("MLmodel.urls")),
     path("Pokemon/",include("pokimonSQL.urls")),
+    path("safePwd/",include("safePwd.urls")),
 ]
