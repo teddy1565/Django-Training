@@ -4,4 +4,4 @@ from .models import PWD
 class PasswordSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PWD
-        fields = ["url","password"]
+        fields = ["url","account","password"]

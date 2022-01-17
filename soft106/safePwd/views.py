@@ -1,3 +1,4 @@
+from email.headerregistry import ContentTypeHeader
 from django.shortcuts import render
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework import viewsets
@@ -18,5 +19,10 @@ class MainPage(viewsets.ModelViewSet):
         return render(request,"password.html")
     
 def regis(request):
-    print(request)
-    return HttpResponse("HI",200)
+    try:
+        queryset = PWD.objects.get(account=request.POST["account"])
+        return HttpResponse("此帳戶已存在")
+    except:
+        queryset = PWD(account=request.POST["account"],password=request.POST["password"])
+        queryset.save()
+        return HttpResponse("註冊成功")
