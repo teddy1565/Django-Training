@@ -22,5 +22,17 @@ class pokemonHomePage(viewsets.ModelViewSet):
 
 def addPokemon(request):
     permission_classes = [permissions.AllowAny]
-    print(request.POST["name"])
-    return HttpResponse("True")
+    queryset = Pokemon.objects.all()
+    
+    try:
+        queryset.get(serial=request.POST["serial"])
+        return HttpResponse("False")
+    except:
+        queryset = Pokemon(name=request.POST["name"],serial=request.POST["serial"],position=request.POST["position"],pokemonType=request.POST["pokemonType"])
+        queryset.save()
+        return HttpResponse("True")
+        
+    # print(request.POST["name"])
+    # print(request.POST["serial"])
+    # print(request.POST["position"])
+    # print(request.POST["pokemonType"])
