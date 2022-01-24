@@ -67,7 +67,7 @@ ROOT_URLCONF = 'soft105.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["public/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
