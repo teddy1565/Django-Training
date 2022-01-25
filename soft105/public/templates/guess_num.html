@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Guess Number Game</title>
+    </head>
+    <body style="text-align:center;">
+        <div style="margin:auto;">
+            <h1>Guess Number Game</h1>
+            <div style = "margin:auto;" id="gameHeader">
+                <button type="button" onclick="gameStart()">GameStart</button>
+            </div>
+            <div style="margin:auto;display:none;" id="gameContent">
+                <input type="number" name="num" id="num_input">
+                <br>
+                <button type="button" onclick="guess()">input</button>
+            </div>
+            <div style="margin:auto;" id="gameInfo">
+                
+            </div>
+        </div>
+    </body>
+    
+</html>
+<script>
+    let counter=0;
+    let WrongCounter = 0;
+    let RightCounter = 0;
+    let answer = parseInt(Math.random()*100)+1;
+
+    function gameStart() {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.status === 200 && xhr.readyState === 4) {
+                console.log(xhr.responseText);
+                document.getElementById("gameHeader").style.display="none";
+                document.getElementById("gameContent").style.display = "block";
+            }
+        };
+        
+        xhr.open("GET",`../generate?num=${answer}`);
+        xhr.send(null);
+    }
+    
+    function guess() {
+        let val = parseInt(document.getElementById("num_input").value) || 0;
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                counter++;
+                console.log(xhr.responseText);
+                document.getElementById("num_input").value=0;
+                let info = document.createElement("p");
+                if (xhr.responseText == "false") {
+                    let concatStr = "";
+                    if (parseInt(val) > parseInt(answer)) {
+                        concatStr = ",You'r Number Bigger Then";
+                    } else {
+                        concatStr = ",You'r Number Smailer Then";
+                    }
+                    info.innerText = `[${counter}]: Guess Wrong ${concatStr}`;
+                    info.style.color = "red";
+                    WrongCounter++;
+                } else if (xhr.responseText == "true") {
+                    info.innerText = `[${counter}]: Guess Right! You Win`;
+                    info.style.color = "green";
+                    RightCounter++;
+                    counter = 3;
+                }
+                document.getElementById("gameInfo").appendChild(info);
+                if (counter == 3) {
+                    setTimeout(() => {
+                        alert(`Game Over\nWrong: ${WrongCounter}\nRight: ${RightCounter}`);
+                        window.location.reload();
+                    },100);
+                }
+            }
+        }
+        xhr.open("POST","../index/");
+        xhr.setRequestHeader("X-CSRFToken","{{ csrf_token }}");
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+        
+        xhr.send(`${val}`);
+    }
+</script>
