@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FinTech Generator Data</title>
+        <style>
+            body{
+                text-align:center;
+                margin:auto;
+            }
+            div{
+                margin:auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <p>產生模擬貸款資料筆數:</p>
+                <br>
+                <input type="number" name="dataNum" placeholder="資料筆數">
+                <br>
+                <p>檔案名稱:</p>
+                <br>
+                <input type="text" name="fileName" placeholder="檔案名稱">
+                <br>
+                <p>顯示前多少筆資料:</p>
+                <br>
+                <input type="number" name="Display_Data_Amount" placeholder="顯示前多少筆資料">
+                <br>
+                <button type="submit">送出</button>
+                <button type="reset">清除</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -67,7 +67,7 @@ ROOT_URLCONF = 'soft105.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["public/templates"],
+        'DIRS': ["public/templates","FinTech/FinTech_Generator"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
