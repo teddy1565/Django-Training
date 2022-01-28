@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>風險評估檢測</title>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <p>模擬貸款資料URI:</p>
+            <input type="url" name="URI" placeholder="模擬貸款資料URI">
+            <br>
+            <p>風險門檻:</p>
+            <input type="number" name="Threshold" placeholder="風險門檻">
+            <br>
+            <p>顯示前N筆超過風險門檻值之貸款資料:</p>
+            <input type="number" name="Amount" placeholder="顯示前N筆資料">
+            <br>
+            <button type="submit">送出</button>
+            <button type="reset">清除</button>
+        </form>
+    </body>
+</html>

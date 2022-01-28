@@ -2,7 +2,7 @@ from rest_framework import routers
 from django.urls import path,include
 
 from .models import FileNameModel
-from .views import Page1,fileURI
+from .views import Page1,fileURI,Page2
 #from .refresh import urls
 from threading import Timer
 from .dynamic_url import downloadRouteConfig,clearRouteConfig
@@ -12,6 +12,7 @@ from os import path as PATH
 
 router = routers.DefaultRouter()
 router.register(r"index",Page1,basename="Page1")
+router.register(r"evaluate",Page2,basename="Page2")
 
 counter = 0
 
